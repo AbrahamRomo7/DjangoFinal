@@ -1,0 +1,27 @@
+
+body {
+    font-family: Arial, sans-serif;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.navbar a {
+    color: white; /* Cambiar el color del texto de los enlaces */
+    text-decoration: none;
+    padding: 14px 20px;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: gray; /* Cambiar el color del texto al pasar el ratón por encima */
+}
+.navbar-left {
+    flex: 1;
+}
+.navbar-right {
+    display: flex;
+    gap: 10px;
+}

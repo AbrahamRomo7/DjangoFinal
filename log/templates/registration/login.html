@@ -1,0 +1,17 @@
+{% extends 'log/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'log/styles/login.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="login-container">
+    <h2>Iniciar Sesión</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+</div>
+{% endblock %}

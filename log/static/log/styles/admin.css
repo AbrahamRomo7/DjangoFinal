@@ -1,0 +1,7 @@
+.logout-link {
+    color: #ff0000; /* Rojo */
+    text-decoration: none;
+}
+.logout-link:hover {
+    text-decoration: underline; /* Subrayar al pasar el ratón */
+}
