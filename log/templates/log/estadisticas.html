@@ -1,6 +1,10 @@
 <!-- En log/templates/log/estadisticas.html -->
 {% extends 'log/base.html' %}
+{% load static %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'log/styles/adminJugadores.css' %}">
+{% endblock %}
 {% block main %}
     <h1>Estadísticas de Partidos</h1>
 

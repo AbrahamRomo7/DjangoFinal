@@ -212,6 +212,13 @@ def estadisticas(request):
             fecha_inicio = form.cleaned_data.get('fecha_inicio')
             fecha_fin = form.cleaned_data.get('fecha_fin')
 
+            # Asegúrate de que las fechas no sean None antes de usarlas en la consulta
+            partidos = Partidos.objects.all()
+            if fecha_inicio:
+                partidos = partidos.filter(fecha__gte=fecha_inicio)
+            if fecha_fin:
+                partidos = partidos.filter(fecha__lte=fecha_fin)
+
             # Llamar a la función para actualizar las predicciones
             predicciones_actualizadas = actualizar_predicciones(fecha_inicio, fecha_fin)
 
@@ -219,7 +226,7 @@ def estadisticas(request):
             context = {
                 'form': form,
                 'predicciones': predicciones_actualizadas,
-                'partidos': Partidos.objects.filter(fecha__gte=fecha_inicio, fecha__lte=fecha_fin)  # Añade esta línea
+                'partidos': partidos  # Utiliza la lista de partidos filtrada
             }
             return render(request, 'log/estadisticas.html', context)
     else:
