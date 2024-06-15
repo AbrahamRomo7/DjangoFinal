@@ -1,0 +1,44 @@
+{% extends 'log/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'log/styles/adminJugadores.css' %}">
+{% endblock %}
+
+{% block main %}
+    <h1>Administrar Estadios</h1>
+
+    <h2>Crear Estadio</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+
+    <h2>Lista de Estadios</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>País</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for estadio in estadios %}
+                <tr>
+                    <td>{{ estadio.nombre }}</td>
+                    <td>{{ estadio.pais }}</td>
+                    <td>                        
+                        <form action="" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ estadio.id }}">
+                            <input type="hidden" name="action" value="delete">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

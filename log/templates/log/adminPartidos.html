@@ -1,0 +1,57 @@
+{% extends 'log/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'log/styles/adminJugadores.css' %}">
+{% endblock %}
+
+{% block main %}
+    <h1>Administrar Partidos</h1>
+
+    <h2>Crear Partido</h2>
+    <form action="{% url 'crear_partido' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+
+    <h2>Lista de Partidos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Barcelona Total</th>
+                <th>Madrid Total</th>
+                <th>Ganador</th>
+                <th>Estadio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for partido in partidos %}
+                <tr>
+                    <td>{{ partido.fecha }}</td>
+                    <td>{{ partido.barcelona_total }}</td>
+                    <td>{{ partido.madrid_total }}</td>
+                    <td>{{ partido.ganador }}</td>
+                    <td>{{ partido.estadio.nombre }}</td>
+                    <td>
+                        <form action="{% url 'eliminar_partido' partido.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="delete">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        $(function() {
+            $('input[name="fecha"]').datepicker({
+                dateFormat: 'yy-mm-dd'  // Formato compatible con Django DateField
+            });
+        });
+    </script>
+{% endblock %}

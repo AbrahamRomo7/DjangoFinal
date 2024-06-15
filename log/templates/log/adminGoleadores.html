@@ -1,0 +1,44 @@
+{% extends 'log/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'log/styles/adminJugadores.css' %}">
+{% endblock %}
+{% block main %}
+    <h1>Administrar Goleadores</h1>
+
+    <h2>Crear Gol</h2>
+    <form action="{% url 'adminGoleadores' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="crear_gol">
+        <button type="submit">Crear Nuevo Gol</button>
+    </form>
+
+    <h2>Lista de Goleadores</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Jugador</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for gol in goles %}
+                <tr>
+                    <td>{{ gol.fecha }}</td>
+                    <td>{{ gol.jugador.nombre }}</td>
+                    <td>
+                        <form action="{% url 'adminGoleadores' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="eliminar_gol">
+                            <input type="hidden" name="gol_id" value="{{ gol.id }}">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -7,5 +7,21 @@
 
 
 {% block main %}
-ADMIN
+<a href="{% url 'adminEstadios' %}">
+    <img src="{% static 'log/images/estadio.png' %}" alt="estadio">
+</a>
+
+<a href="{% url 'adminJugadores' %}">
+    <img src="{% static 'log/images/jugador.png' %}" alt="estadio">
+</a>
+
+<a href="{% url 'adminGoleadores' %}">
+    <img src="{% static 'log/images/goles.png' %}" alt="estadio">
+</a>
+
+<a href="{% url 'adminPartidos' %}">
+    <img src="{% static 'log/images/partidos.png' %}" alt="estadio">
+</a>
+
+
 {% endblock %}

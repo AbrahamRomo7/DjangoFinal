@@ -1,0 +1,10 @@
+<!-- En log/editar_jugador.html -->
+{% extends 'log/base.html' %}
+{% block main %}
+    <h1>Editar Jugador</h1>
+    <form action="{% url 'editar_jugador' jugador.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+{% endblock %}

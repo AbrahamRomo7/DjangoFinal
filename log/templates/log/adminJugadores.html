@@ -1,0 +1,39 @@
+<!-- En log/adminJugadores.html -->
+{% extends 'log/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'log/styles/adminJugadores.css' %}">
+{% endblock %}
+
+{% block main %}
+    <h1>Administrar Jugadores</h1>
+
+    <h2>Crear Jugador</h2>
+    <a href="{% url 'crear_jugador' %}">Crear Nuevo Jugador</a>
+
+    <h2>Lista de Jugadores</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Posición</th>
+                <th>Equipo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for jugador in jugadores %}
+                <tr>
+                    <td>{{ jugador.nombre }}</td>
+                    <td>{{ jugador.posicion }}</td>
+                    <td>{{ jugador.equipo }}</td>
+                    <td>
+                        <a href="{% url 'editar_jugador' jugador.id %}">Editar</a>
+                        <a href="{% url 'eliminar_jugador' jugador.id %}">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

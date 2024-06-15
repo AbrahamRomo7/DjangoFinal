@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
-    <link rel="stylesheet" href="{% static 'log/styles/nav.css' %}">
+   
     <link rel="stylesheet" href="{% static 'log/styles/base.css' %}">
     {% block head %}
     {% endblock %}
@@ -23,8 +23,6 @@
             {% endblock %}
         </div>
         <div class="navbar-right">
-            <a href="{% url 'jugadores' %}">Jugadores</a>
-            <a href="{% url 'partidos' %}">Partidos</a>
             <a href="{% url 'estadisticas' %}">Estadísticas</a>
             
         </div>

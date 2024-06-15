@@ -1,6 +1,46 @@
+<!-- En log/templates/log/estadisticas.html -->
 {% extends 'log/base.html' %}
-{% load static %}
 
 {% block main %}
-ESTADISTICAS
+    <h1>Estadísticas de Partidos</h1>
+
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit">Filtrar</button>
+    </form>
+
+    {% if predicciones %}
+        <h2>Predicciones Actualizadas</h2>
+        <p>Barcelona: {{ predicciones.barcelona }}</p>
+        <p>Madrid: {{ predicciones.madrid }}</p>
+        <p>Empate: {{ predicciones.empate }}</p>
+        <p>Total: {{ predicciones.suma }}</p>
+    {% endif %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Barcelona Total</th>
+                <th>Madrid Total</th>
+                <th>Ganador</th>
+                <th>Estadio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for partido in partidos %}
+                <tr>
+                    <td>{{ partido.fecha }}</td>
+                    <td>{{ partido.barcelona_total }}</td>
+                    <td>{{ partido.madrid_total }}</td>
+                    <td>{{ partido.ganador }}</td>
+                    <td>{{ partido.estadio.nombre }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No se encontraron partidos</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

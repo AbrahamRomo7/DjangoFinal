@@ -1,6 +1,7 @@
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save, post_delete
+from django.forms import DateField, DateInput, Form
 
 # Create your models here.
 class Equipo(models.Model):
@@ -46,6 +47,18 @@ class Partidos(models.Model):
         self.determinar_ganador()
         super().save(*args, **kwargs)
 
+
+class Predicciones(models.Model):
+    barcelona = models.IntegerField()
+    empate = models.IntegerField()
+    madrid = models.IntegerField()
+    suma = models.IntegerField(default=0)
+    def __str__(self):
+        return f"{self.barcelona} - {self.empate}- {self.madrid}"
+
+class FiltroPartidosForm(Form):
+    fecha_inicio = DateField(label='Fecha de Inicio', required=False, widget=DateInput(attrs={'type': 'date'}))
+    fecha_fin = DateField(label='Fecha de Fin', required=False, widget=DateInput(attrs={'type': 'date'}))
 
 class Goles(models.Model):
     fecha = models.ForeignKey(Partidos, on_delete=models.CASCADE)
