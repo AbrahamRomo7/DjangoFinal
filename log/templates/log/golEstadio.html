@@ -1,0 +1,33 @@
+<!-- En log/templates/log/estadisticas.html -->
+{% extends 'log/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'log/styles/adminJugadores.css' %}">
+{% endblock %}
+{% block main %}
+<a href="{% url 'poblar_estadio_fecha_goles' %}">Administrador</a>
+<h1>Goles por Estadio</h1>
+
+    <form method="GET">
+        {{ form.as_p }}
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Estadio</th>
+                <th>Cantidad de Goles</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for estadio_gol in estadio_goles %}
+            <tr>
+                <td>{{ estadio_gol.estadio.nombre }}</td>
+                <td>{{ estadio_gol.goles }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
