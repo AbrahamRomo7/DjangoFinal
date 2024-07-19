@@ -8,6 +8,25 @@ from django.contrib import messages
 from sklearn.linear_model import LinearRegression
 import numpy as np
 from django.db.models import Count
+from .factories import EquipoFactory, JugadorFactory, EstadioFactory, PartidosFactory, PrediccionesFactory, GolesFactory
+
+# Crear un equipo
+barcelona = EquipoFactory.create(nombre="FC BARCELONA")
+
+# Crear un jugador
+messi = JugadorFactory.create(nombre="Lionel Messi", posicion="Delantero", equipo=barcelona)
+
+# Crear un estadio
+camp_nou = EstadioFactory.create(nombre="Camp Nou", pais="España")
+
+# Crear un partido
+partido = PartidosFactory.create(fecha="2024-07-18", barcelona_total=0, madrid_total=0, estadio=camp_nou)
+
+# Crear una predicción
+prediccion = PrediccionesFactory.create(barcelona=2, empate=1, madrid=1)
+
+# Crear un gol
+gol = GolesFactory.create(fecha=partido, jugador=messi)
 
 def home(request):
     return render(request,'log/home.html')
